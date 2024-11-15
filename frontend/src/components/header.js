@@ -21,6 +21,8 @@ const Header = () => {
                 <span class="divider">|</span>
                 <nav class="nav-link">
                     <Link to="/login">Login</Link>
+                    <span class="divider">|</span>
+                    <Link to="/register">Register</Link>
                 </nav>
             </div>
         </header>
