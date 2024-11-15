@@ -18,12 +18,15 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from rest_framework.routers import DefaultRouter
 from app import views
+from app.views import register
+
 
 router = DefaultRouter()
 router.register(r'scholarships', views.ScholarshipViewSet)
 router.register(r'applications', views.ApplicationViewSet)
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
+    path('api/register/', register, name='register'),
 ]
