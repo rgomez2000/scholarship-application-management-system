@@ -22,8 +22,9 @@ const Header = () => {
     // Handle click on Home, redirect to /apply if authenticated
     const handleHomeClick = () => {
         if (isAuthenticated) {
-            navigate('/apply');
-            navigate('/');
+            navigate('/apply'); // Redirect to /apply if authenticated
+        } else {
+            navigate('/'); // Stay on the home page if not authenticated
         }
     };
 
