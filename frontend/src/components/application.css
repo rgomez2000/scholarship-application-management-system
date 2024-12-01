@@ -33,7 +33,7 @@ li {
 }
 
 button {
-    width: 8rem;
+    width: auto;
     padding: 10px;
     border: none;
     border-radius: 5px;
