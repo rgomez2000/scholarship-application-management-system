@@ -67,3 +67,16 @@ a {
 .button-group {
     padding: 10px;
 }
+.logout-link {
+    all: unset;
+    color: #0000EE;     /* Default HTML blue color */
+    cursor: pointer;   /* Change the cursor to a pointer to indicate it's clickable */
+    padding: 0;         /* Remove default padding */
+    font: inherit;      /* Inherit font styling */
+    background: none;
+    outline: none;
+}
+.logout-link:hover {
+    background: none; /* No background on hover */
+    outline: none;    /* Remove outline */
+}

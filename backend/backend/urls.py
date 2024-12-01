@@ -19,7 +19,9 @@ from django.urls import path, include, re_path
 from rest_framework.routers import DefaultRouter
 from app import views
 from app.views import register
-
+from django.conf import settings
+from django.conf.urls.static import static
+from app.views import LoginView, UserProfileView, LogoutView
 
 router = DefaultRouter()
 router.register(r'scholarships', views.ScholarshipViewSet)
@@ -28,5 +30,13 @@ router.register(r'applications', views.ApplicationViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
     path('api/register/', register, name='register'),
+    path('api/login/', LoginView.as_view(), name='login'),
+    path('api/user/', UserProfileView.as_view(), name='user_profile'),
+    path('api/logout/', LogoutView.as_view(), name='logout'),
 ]
+
+# Serve media files during development
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

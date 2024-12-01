@@ -1,29 +1,67 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './header.css'
+import { Link, useNavigate } from 'react-router-dom';
+import './header.css';
 
 const Header = () => {
+    const navigate = useNavigate();
+    
+    // Check if the user is authenticated by looking for the token in localStorage
+    const isAuthenticated = localStorage.getItem('token') !== null;
+    
+    // Retrieve the username from localStorage
+    const firstName = localStorage.getItem('first_name') || localStorage.getItem('username'); // Fallback to username if first name is not available
+
+    // Logout function to clear the token and redirect to the homepage
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        localStorage.removeItem('first_name');
+        navigate('/',{ replace: true }); // Redirect to homepage after logout
+    };
+
+    // Handle click on Home, redirect to /apply if authenticated
+    const handleHomeClick = () => {
+        if (isAuthenticated) {
+            navigate('/apply');
+            navigate('/');
+        }
+    };
+
     return (
         <header>
-             <div class="header-section brand">
+            <div className="header-section brand">
                 <h1>ScholarAid</h1>
-                <span class="divider">|</span>
+                <span className="divider">|</span>
             </div>
 
-            <div class="header-section navigation">
-                <nav class="nav-link">
-                    <Link to="/">Home</Link>
+            <div className="header-section navigation">
+                <nav className="nav-link">
+                <button onClick={handleHomeClick} className="logout-link">Home</button>
                 </nav>
             </div>
 
-            <div class="header-section auth-links">
-                <span> Hi  Guest </span>
-                <span class="divider">|</span>
-                <nav class="nav-link">
-                    <Link to="/login">Login</Link>
-                    <span class="divider">|</span>
-                    <Link to="/register">Register</Link>
-                </nav>
+            <div className="header-section auth-links">
+                {isAuthenticated ? (
+                    <>
+                        <span>Hi, {firstName}</span>
+                        <span className="divider">|</span>
+                        <nav className="nav-link">
+                            <Link to="/profile">Profile</Link>
+                            <span className="divider">|</span>
+                            <button onClick={handleLogout} className="logout-link">Logout</button>
+                        </nav>
+                    </>
+                ) : (
+                    <>
+                        <span>Hi, Guest</span>
+                        <span className="divider">|</span>
+                        <nav className="nav-link">
+                            <Link to="/login">Login</Link>
+                            <span className="divider">|</span>
+                            <Link to="/register">Register</Link>
+                        </nav>
+                    </>
+                )}
             </div>
         </header>
     );
