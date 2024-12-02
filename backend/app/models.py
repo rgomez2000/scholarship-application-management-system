@@ -40,7 +40,7 @@ class Applicant(models.Model):
         ("PT", "Part Time"),
     ]
     scholarship = models.ForeignKey(Scholarship, on_delete=models.CASCADE,null=True, blank=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True, blank=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True, blank=False)
     email = models.EmailField(unique=True)
     phone_number = PhoneNumberField(unique=True, null=True, blank=False)
     first_name = models.CharField(max_length=32, null=True, blank=False)
@@ -63,8 +63,8 @@ class Application(models.Model):
         ('rejected', 'Rejected')
         ]
     
-    scholarship = models.ForeignKey(Scholarship, on_delete=models.CASCADE)
-    applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE)
+    scholarship = models.ForeignKey(Scholarship, related_name="applications", on_delete=models.CASCADE)
+    applicant = models.ForeignKey(Applicant,  related_name="applications", on_delete=models.CASCADE)
     submitted_on = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=STATUS_TYPES)
 

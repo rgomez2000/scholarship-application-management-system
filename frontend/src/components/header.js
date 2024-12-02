@@ -22,10 +22,14 @@ const Header = () => {
     // Handle click on Home, redirect to /apply if authenticated
     const handleHomeClick = () => {
         if (isAuthenticated) {
-            navigate('/apply'); // Redirect to /apply if authenticated
+            navigate('/'); // Redirect to /apply if authenticated
         } else {
             navigate('/'); // Stay on the home page if not authenticated
         }
+    };
+
+    const handleProfile = () => {
+        navigate('/profile');  // This will navigate to the /profile route
     };
 
     return (
@@ -47,7 +51,7 @@ const Header = () => {
                         <span>Hi, {firstName}</span>
                         <span className="divider">|</span>
                         <nav className="nav-link">
-                            <Link to="/profile">Profile</Link>
+                        <button onClick={handleProfile} className="logout-link">Profile</button>
                             <span className="divider">|</span>
                             <button onClick={handleLogout} className="logout-link">Logout</button>
                         </nav>

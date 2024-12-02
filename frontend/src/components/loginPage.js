@@ -23,7 +23,7 @@ const LoginPage = () => {
             localStorage.setItem('first_name', response.data.first_name);
 
             // Redirect to homepage
-            navigate('/apply'); // Redirect to homepage (you can change this to any route you want)
+            navigate('/'); // Redirect to homepage
         } catch (error) {
             setMessage('Invalid credentials');
         }
