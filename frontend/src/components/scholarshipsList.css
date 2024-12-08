@@ -111,3 +111,153 @@ button:hover {
 .reports-button:hover::before {
     width: 100%;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin-top: 20px; 
+}
+
+
+.pagination button:disabled {
+    cursor: not-allowed; 
+    opacity: 0.5;
+}
+
+.pagination span {
+    margin: 0 10px; 
+    font-size: 16px; 
+}
+
+/* SEARCH BAR CONTAINER  */
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    width: 60%;
+}
+
+.search-bar-container label {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.search-bar-container input {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.search-bar-container input:focus {
+    border-color: #4285f4;
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.2);
+}
+
+.search-bar-container input::placeholder {
+    color: #999;
+
+}
+
+/* DROPDOWN MENU CONTAINER  */
+.dropdown-menu-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Allows wrapping if space is limited */
+    margin: 10px auto;
+    gap: 15px; /* Adds spacing between elements */
+    width: 80%; /* Adjust width to fit your layout */
+}
+
+.dropdown-menu-container label {
+    font-size: 14px;
+    color: #555;
+    margin-right: 5px;
+}
+
+.dropdown-menu-container select,
+.dropdown-menu-container input[type="number"] {
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: box-shadow 0.3s, border-color 0.3s;
+    width: auto; /* Makes the dropdown size adjust dynamically */
+    min-width: 150px; /* Ensures consistent size */
+    max-width: 200px; 
+}
+
+.dropdown-menu-container select:focus,
+.dropdown-menu-container input[type="number"]:focus {
+    border-color: #4285f4;
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.2);
+}
+
+.dropdown-menu-container select:hover,
+.dropdown-menu-container input[type="number"]:hover {
+    cursor: pointer;
+}
+
+.dropdown-menu-container input[type="number"]::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+
+/* DATE CONTAINER  */
+.date-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Adds spacing between the two date fields */
+    margin: 10px auto;
+    width: 80%; /* Adjust width to fit your layout */
+}
+
+.date-container label {
+    font-size: 14px;
+    color: #555;
+    margin-right: 5px;
+}
+
+.date-container input[type="date"] {
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: box-shadow 0.3s, border-color 0.3s;
+    width: auto; /* Makes the input size adjust dynamically */
+    min-width: 150px; /* Ensures consistent size */
+}
+
+/* Change placeholder color for date input */
+.date-container input[type="date"]::placeholder {
+    color: #999; /* Set the placeholder color */
+}
+
+.date-container input[type="date"]:focus {
+    border-color: #4285f4;
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.2);
+}
+
+.date-container input[type="date"]:hover {
+    cursor: pointer;
+}
