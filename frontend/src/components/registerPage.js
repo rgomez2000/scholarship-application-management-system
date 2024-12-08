@@ -26,8 +26,21 @@ const Register = () => {
         setError(null);
         setSuccess(null);
 
+        const data = {
+            username: formData.username,
+            email: formData.email,
+            password: formData.password,
+            password2: formData.password2
+        };
+
         try {
-            const response = await axios.post('http://localhost:8000/api/register/', formData);
+            const response = await axios.post('http://localhost:8000/api/register/',
+                data,
+                {
+                    headers: {
+                        'Content-Type': 'application/json', // Ensure JSON content type
+                    }
+                });
 
             // Save the token and success message
             localStorage.setItem('token', response.data.token);
