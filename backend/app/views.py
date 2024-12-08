@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -5,6 +6,7 @@ from django.contrib.auth import authenticate, login
 from rest_framework.response import Response
 from rest_framework import viewsets
 from .models import *
+from .permissions import IsAdminUser
 from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
@@ -102,15 +104,22 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
 
-@api_view(['POST'])
-def register(request):
-    if request.method == 'POST':
+class RegisterView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
         serializer = UserRegistrationSerializer(data=request.data)
+
         if serializer.is_valid():
             user = serializer.save()
+
+            admins = Group.objects.create(name="Admin")
+            user.groups.add(admins)
+
             token = Token.objects.create(user=user)
             return Response({"message": "User registered successfully!", "token": token.key}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({'message': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
     permission_classes = [AllowAny]
@@ -124,10 +133,15 @@ class LoginView(APIView):
 
         if user is not None:
             login(request, user)
+
+            # Get user groups (roles)
+            groups = user.groups.values_list('name', flat=True)  # List of group names
+
             return Response({
                 'message': 'Login successful',
                 'first_name': user.first_name,  # Include first name in the response
-                'username': user.username        # Include username as well if needed
+                'username': user.username,        # Include username as well if needed
+                'groups': list(groups),  # Convert queryset to list
             }, status=status.HTTP_200_OK)
         else:
             return Response({'message': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
@@ -151,4 +165,10 @@ class LogoutView(APIView):
     def post(self, request, *args, **kwargs):
         logout(request)  # Log the user out by clearing the session
         return Response({'message': 'Logout successful'})
-    
+
+# Check if a user is restricted from a given action or seeing a page
+class RestrictedView(APIView):
+    permission_classes = [IsAdminUser]
+
+    def get(self, request):
+        return Response({"message": "Welcome, Admin!"})
