@@ -21,6 +21,8 @@ from django.db.models import Q
 
 
 class ScholarshipFilter(django_filters.FilterSet):
+    permission_classes = [AllowAny]
+
     # Filter by renewal type
     renewal_type = django_filters.ChoiceFilter(choices=Scholarship.RENEWAL_TYPES)
 
@@ -71,6 +73,8 @@ class ScholarshipFilter(django_filters.FilterSet):
         fields = ['renewal_type', 'min_amount', 'max_amount', 'date_range_start', 'date_range_end', 'organization', 'department', 'donor', 'search', 'has_amount']
 
 class ScholarshipViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
+
     queryset = Scholarship.objects.all()
     serializer_class = ScholarshipSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
