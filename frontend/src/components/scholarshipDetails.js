@@ -11,9 +11,9 @@ const ScholarshipDetails = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const scholarships = await getScholarships();
-            const selectedScholarship = scholarships.find(sch => sch.id === parseInt(id));
-            setScholarship(selectedScholarship);
+            const data = await getScholarships();
+            const selectedScholarship = data.results.find(sch => sch.id === parseInt(id)); 
+        setScholarship(selectedScholarship);
         }
         fetchData();
     }, [id]); // Fetch new data whenever the ID changes
