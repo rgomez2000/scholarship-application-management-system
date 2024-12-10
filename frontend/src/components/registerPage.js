@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';  // Change to useNavigate
+import './registerPage.css'
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -54,11 +55,11 @@ const Register = () => {
     };
 
     return (
-        <div>
+        <div class="form-container">
             <h2>Register</h2>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {success && <p style={{ color: 'green' }}>{success}</p>}
-            <form onSubmit={handleSubmit}>
+            <form class="form-group" onSubmit={handleSubmit}>
                 <div>
                     <label>Username:</label>
                     <input
@@ -99,7 +100,7 @@ const Register = () => {
                         required
                     />
                 </div>
-                <button type="submit">Register</button>
+                <button class="form-container-button" type="submit">Register</button>
             </form>
         </div>
     );
