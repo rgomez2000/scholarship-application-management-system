@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getScholarships } from './services/api';
+import {checkIsAdmin, getScholarships} from './services/api';
 import './scholarshipDetails.css';
 
 const ScholarshipDetails = () => {
@@ -8,6 +8,7 @@ const ScholarshipDetails = () => {
     const [scholarship, setScholarship] = useState(null);
     const navigate = useNavigate();
     const isAuthenticated = localStorage.getItem('token') !== null; // Check if user is authenticated
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
@@ -15,7 +16,14 @@ const ScholarshipDetails = () => {
             const selectedScholarship = data.results.find(sch => sch.id === parseInt(id)); 
         setScholarship(selectedScholarship);
         }
+
+        async function fetchIsAdmin() {
+            const isAdminFlag = await checkIsAdmin();
+            setIsAdmin(isAdminFlag);
+        }
+
         fetchData();
+        fetchIsAdmin();
     }, [id]); // Fetch new data whenever the ID changes
 
     if (!scholarship) {
@@ -42,9 +50,9 @@ const ScholarshipDetails = () => {
             <p>{scholarship.description}</p>
             <h3>Additional Info</h3>
             <p>{scholarship.additional_info}</p>
-            {isAuthenticated && (
-                            <button onClick={() => handleApply(scholarship.id)}>Apply</button>
-                        )}
+            {isAuthenticated && (<button onClick={() => handleApply(scholarship.id)}>Apply</button>)}
+            {isAdmin && (<button onClick={() => {}}>Edit</button>)}
+            {isAdmin && (<button onClick={() => {}}>Delete</button>)}
         </div>
     );
 };
