@@ -8,8 +8,10 @@ from .models import *
 from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
+from rest_framework.decorators import api_view
 from django.contrib.auth import logout
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authtoken.models import Token
 
 class ScholarshipViewSet(viewsets.ModelViewSet):
     queryset = Scholarship.objects.all()
@@ -25,7 +27,8 @@ def register(request):
         serializer = UserRegistrationSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
-            return Response({"message": "User registered successfully!"}, status=status.HTTP_201_CREATED)
+            token = Token.objects.create(user=user)
+            return Response({"message": "User registered successfully!", "token": token.key}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
@@ -47,13 +50,19 @@ class LoginView(APIView):
             }, status=status.HTTP_200_OK)
         else:
             return Response({'message': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
-        
+
 class UserProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         user = request.user  # The logged-in user
-        return Response({"first_name": user.first_name}, status=200)
+        # Get applicant details associated with the user
+        try:
+            applicant = Applicant.objects.get(user=user)
+            serializer = ApplicantSerializer(applicant)
+            return Response(serializer.data)  # Return the applicant data
+        except Applicant.DoesNotExist:
+            return Response({"detail": "Applicant data not found."}, status=404)
 
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
@@ -61,3 +70,4 @@ class LogoutView(APIView):
     def post(self, request, *args, **kwargs):
         logout(request)  # Log the user out by clearing the session
         return Response({'message': 'Logout successful'})
+    

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Scholarship
 from .models import Applicant
+
 # Register your models here.
 
 class ScholarshipAdmin(admin.ModelAdmin):

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; // For accessing route parameters
+import { useParams, useNavigate } from 'react-router-dom';
 import { getScholarships } from './services/api';
 import './scholarshipDetails.css';
 
 const ScholarshipDetails = () => {
     const { id } = useParams(); // Get the scholarship ID from the URL
     const [scholarship, setScholarship] = useState(null);
+    const navigate = useNavigate();
+    const isAuthenticated = localStorage.getItem('token') !== null; // Check if user is authenticated
 
     useEffect(() => {
         async function fetchData() {
@@ -20,6 +22,15 @@ const ScholarshipDetails = () => {
         return <p>Loading...</p>;
     }
 
+    const handleApply = (id) => {
+        // Navigate to the application page for the specific scholarship
+        if (isAuthenticated) {
+            navigate(`/apply/${id}`);
+        } else {
+            alert('You must be logged in to apply.');
+        }
+    };
+
     return (
         <div>
             <h1>{scholarship.scholarship_name}</h1>
@@ -31,6 +42,9 @@ const ScholarshipDetails = () => {
             <p>{scholarship.description}</p>
             <h3>Additional Info</h3>
             <p>{scholarship.additional_info}</p>
+            {isAuthenticated && (
+                            <button class="scholarship-details-button" onClick={() => handleApply(scholarship.id)}>Apply</button>
+                        )}
         </div>
     );
 };

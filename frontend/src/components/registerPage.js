@@ -1,6 +1,8 @@
 // src/components/Register.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';  // Change to useNavigate
+import './registerPage.css'
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -11,6 +13,7 @@ const Register = () => {
     });
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
+    const navigate = useNavigate();  // Use useNavigate here
 
     const handleChange = (e) => {
         setFormData({
@@ -26,6 +29,12 @@ const Register = () => {
 
         try {
             const response = await axios.post('http://localhost:8000/api/register/', formData);
+
+            // Save the token and success message
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('registerSuccess', 'You have successfully registered!');
+            localStorage.setItem('first_name', response.data.first_name || formData.username);
+            
             setSuccess(response.data.message);
             setFormData({
                 username: '',
@@ -33,6 +42,9 @@ const Register = () => {
                 password: '',
                 password2: ''
             });
+
+            // Redirect to profile page
+            navigate('/profile');  // Use navigate for redirection
         } catch (err) {
             if (err.response) {
                 setError(err.response.data);
@@ -43,11 +55,11 @@ const Register = () => {
     };
 
     return (
-        <div>
+        <div class="form-container">
             <h2>Register</h2>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {success && <p style={{ color: 'green' }}>{success}</p>}
-            <form onSubmit={handleSubmit}>
+            <form class="form-group" onSubmit={handleSubmit}>
                 <div>
                     <label>Username:</label>
                     <input
@@ -88,7 +100,7 @@ const Register = () => {
                         required
                     />
                 </div>
-                <button type="submit">Register</button>
+                <button class="form-container-button" type="submit">Register</button>
             </form>
         </div>
     );

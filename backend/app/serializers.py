@@ -31,3 +31,8 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
         return user
+    
+class ApplicantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Applicant
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'birth_date', 'address1', 'address2', 'gpa', 'academic_level', 'enrollment_status', 'department']

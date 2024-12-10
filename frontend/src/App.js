@@ -5,8 +5,8 @@ import ScholarshipsList from './components/scholarshipsList';
 import LoginPage from './components/loginPage'; 
 import RegisterPage from './components/registerPage';
 import ScholarshipDetails from './components/scholarshipDetails';
-import ScholarshipsListAuth from './components/scholarshipsListAuth';
 import ApplicationPage from './components/application';
+import Profile from './components/profilePage';
 
 function App() {
   return (
@@ -21,8 +21,8 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/scholarship/:id" element={<ScholarshipDetails />} />
-                <Route path="/apply" element={<ScholarshipsListAuth />} />
                 <Route path="/apply/:id" element={<ApplicationPage />} />
+                <Route path="/profile" element={<Profile />} />
             </Routes>
         
       </div>
