@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils import timezone
+from decimal import Decimal, InvalidOperation
 
 # Create your models here.
 
@@ -21,13 +22,30 @@ class Scholarship(models.Model):
     scholarship_name = models.CharField(max_length=100, null=True, blank=False)
     open_date = models.DateField()
     deadline = models.DateField()
+    date_created = models.DateTimeField(auto_now_add=True)
     renewal_type = models.CharField(max_length=32, choices=RENEWAL_TYPES, null=True, blank=False)
     amount = models.CharField(max_length=50, null=False, blank=False)
     organization = models.CharField(max_length=100, null=True, blank=False)
-    department = models.CharField(max_length=100, null=True, blank=False)
+    department = models.CharField(max_length=100, null=True, blank=True)
     donor = models.CharField(max_length=100, null=True, blank=False)
     description = models.TextField(null=False, blank=False)
     additional_info = models.TextField(null=True, blank=False)
+
+    @staticmethod
+    def convert_to_decimal(value):
+        try:
+            # Remove non-numeric characters like '$' and commas
+            cleaned_value = value.replace('$', '').replace(',', '').strip()
+            return Decimal(cleaned_value)
+        except (InvalidOperation, ValueError):
+            return "Varies"  # Set invalid values to 0 instead of None
+        
+    def save(self, *args, **kwargs):
+        if isinstance(self.amount, str):  # Convert string amounts to Decimal if applicable
+            self.amount = self.convert_to_decimal(self.amount)
+        super().save(*args, **kwargs)
+
+    
     
 class Applicant(models.Model):
     ACADEMIC_LEVEL = [

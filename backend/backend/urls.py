@@ -18,10 +18,10 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from rest_framework.routers import DefaultRouter
 from app import views
-from app.views import register
+# from app.views import register
 from django.conf import settings
 from django.conf.urls.static import static
-from app.views import LoginView, UserProfileView, LogoutView
+from app.views import LoginView, UserProfileView, LogoutView, RegisterView, RestrictedView
 from rest_framework.authtoken.views import obtain_auth_token
 
 router = DefaultRouter()
@@ -32,11 +32,12 @@ router.register(r'applications', views.ApplicationViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('api/register/', register, name='register'),
+    path('api/register/', RegisterView.as_view(), name='register'),
     path('api/login/', LoginView.as_view(), name='login'),
     path('api/logout/', LogoutView.as_view(), name='logout'),
     path('api/profile/', UserProfileView.as_view(), name='user-profile'),
     path('api/token/', obtain_auth_token, name='api_token'),
+    path('api/restricted/', RestrictedView.as_view(), name='restricted')
 ]
 
 # Serve media files during development
