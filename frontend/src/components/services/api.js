@@ -63,6 +63,21 @@ export const submitApplication = async (applicationData) => {
     return response.data;
 };
 
+export const createScholarship = async (createdData) => {
+    console.log(createdData);
+    const response = await axios.post(`${API_URL}scholarships/`, createdData, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+    });
+
+    if (response.status !== 201) {
+        throw new Error('Failed to create scholarship');
+    }
+
+    return response.data;
+};
+
 export const updateScholarship = async (id, updatedData) => {
     const response = await axios.put(`${API_URL}scholarships/${id}/`, updatedData, {
         headers: {
@@ -81,7 +96,7 @@ export const deleteScholarship = async (id) => {
         },
     });
 
-    if (response.status !== 204) { // 204 means "No Content", successful deletion
+    if (response.status !== 204) {
         throw new Error('Failed to delete scholarship');
     }
 };

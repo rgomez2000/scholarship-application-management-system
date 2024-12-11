@@ -7,6 +7,7 @@ import RegisterPage from './components/registerPage';
 import ScholarshipDetails from './components/scholarshipDetails';
 import ApplicationPage from './components/application';
 import Profile from './components/profilePage';
+import AddScholarship from "./components/addScholarship";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/scholarship/:id" element={<ScholarshipDetails />} />
+                <Route path="/addScholarship" element={<AddScholarship />}></Route>
                 <Route path="/apply/:id" element={<ApplicationPage />} />
                 <Route path="/profile" element={<Profile />} />
             </Routes>
