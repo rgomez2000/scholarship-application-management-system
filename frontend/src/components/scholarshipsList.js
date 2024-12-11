@@ -114,7 +114,7 @@ const ScholarshipsList = () => {
 
     return (
         <div>
-            <h1>Welcome to ScholarshipAid</h1>
+            <h1>Welcome to ScholarAid</h1>
 
             {/* Filters and Sorts */}
             <div>
@@ -250,7 +250,7 @@ const ScholarshipsList = () => {
                                 <p><strong>Department:</strong> {scholarship.department}</p>
                                 <p><strong>Apply Between:</strong> {new Date(scholarship.open_date).toLocaleDateString()} - {new Date(scholarship.deadline).toLocaleDateString()}</p>
                                 {isAuthenticated && (
-                                    <button onClick={() => handleApply(scholarship.id)}>Apply</button>
+                                    <button class="scholarships-list-button" onClick={() => handleApply(scholarship.id)}>Apply</button>
                                 )}
                             </li>
                         ))}

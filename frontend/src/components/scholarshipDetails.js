@@ -43,7 +43,7 @@ const ScholarshipDetails = () => {
             <h3>Additional Info</h3>
             <p>{scholarship.additional_info}</p>
             {isAuthenticated && (
-                            <button onClick={() => handleApply(scholarship.id)}>Apply</button>
+                            <button class="scholarship-details-button" onClick={() => handleApply(scholarship.id)}>Apply</button>
                         )}
         </div>
     );

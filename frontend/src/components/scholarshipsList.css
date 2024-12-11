@@ -32,7 +32,7 @@ li {
     margin-bottom: 15px;
 }
 
-button {
+.scholarships-list-button {
     width: 8rem;
     padding: 10px;
     border: none;
@@ -46,7 +46,7 @@ button {
     white-space: nowrap;
 }
 
-button:hover {
+.scholarships-list-button:hover {
     background-color: #218cfd;
 }
 
