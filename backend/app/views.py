@@ -1,24 +1,33 @@
 from django.contrib.auth.models import Group
 from django.shortcuts import render
-from rest_framework import status
-from rest_framework.decorators import api_view
 from django.contrib.auth import authenticate, login
 from rest_framework.response import Response
-from rest_framework import viewsets
+from rest_framework import viewsets, status
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.decorators import api_view
+from rest_framework.authtoken.models import Token
+from rest_framework.views import APIView
+from rest_framework.filters import OrderingFilter
+from rest_framework.authtoken.views import ObtainAuthToken
 from .models import *
 from .permissions import IsAdminUser
 from .serializers import *
-from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
-from rest_framework.decorators import api_view
 from django.contrib.auth import logout
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authtoken.models import Token
 import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import OrderingFilter
 from django.db.models import Q
 
+class CustomAuthToken(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        # Get the token using the default ObtainAuthToken behavior
+        serializer = self.serializer_class(data=request.data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        
+        # Create a token or retrieve an existing one for the user
+        token, created = Token.objects.get_or_create(user=user)
+        
+        return Response({'token': token.key})
 
 class ScholarshipFilter(django_filters.FilterSet):
     permission_classes = [AllowAny]
@@ -176,3 +185,18 @@ class RestrictedView(APIView):
 
     def get(self, request):
         return Response({"message": "Welcome, Admin!"})
+    
+class NotificationListView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        notifications = Notification.objects.filter(user=request.user).order_by('-created_at')
+        serializer = NotificationSerializer(notifications, many=True)
+        return Response(serializer.data)
+    
+class ClearNotificationsView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        Notification.objects.filter(user=request.user).delete()
+        return Response({"message": "All notifications cleared."})

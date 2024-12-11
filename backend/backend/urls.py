@@ -21,8 +21,7 @@ from app import views
 # from app.views import register
 from django.conf import settings
 from django.conf.urls.static import static
-from app.views import LoginView, UserProfileView, LogoutView, RegisterView, RestrictedView
-from rest_framework.authtoken.views import obtain_auth_token
+from app.views import *
 
 router = DefaultRouter()
 router.register(r'scholarships', views.ScholarshipViewSet)
@@ -36,8 +35,10 @@ urlpatterns = [
     path('api/login/', LoginView.as_view(), name='login'),
     path('api/logout/', LogoutView.as_view(), name='logout'),
     path('api/profile/', UserProfileView.as_view(), name='user-profile'),
-    path('api/token/', obtain_auth_token, name='api_token'),
-    path('api/restricted/', RestrictedView.as_view(), name='restricted')
+    path('api/token/', CustomAuthToken.as_view(), name='api_token_auth'),
+    path('api/restricted/', RestrictedView.as_view(), name='restricted'),
+    path('api/notifications/', NotificationListView.as_view(), name='notifications'),
+     path('api/notifications/clear/', ClearNotificationsView.as_view(), name='clear_notifications'),
 ]
 
 # Serve media files during development
