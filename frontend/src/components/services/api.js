@@ -42,7 +42,61 @@ export const getScholarships = async (filters = {}, sort = '', page = 1, pageSiz
     }
 };
 
+export const checkIsAdmin = async () => {
+    const token = localStorage.getItem('token');
+    if(token === "undefined" || !token || token == null) {
+        return false;
+    }
+
+    const response = await axios.get(`${API_URL}restricted/`, {
+        headers: {
+            'Authorization': `Token ${token}`,  // Add token to Authorization header
+        }
+    });
+
+    // For now we can just check if there wasn't an error when validating the token
+    return response.status === 200;
+};
+
 export const submitApplication = async (applicationData) => {
     const response = await axios.post(`${API_URL}applications/`, applicationData);
     return response.data;
+};
+
+export const createScholarship = async (createdData) => {
+    console.log(createdData);
+    const response = await axios.post(`${API_URL}scholarships/`, createdData, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+    });
+
+    if (response.status !== 201) {
+        throw new Error('Failed to create scholarship');
+    }
+
+    return response.data;
+};
+
+export const updateScholarship = async (id, updatedData) => {
+    const response = await axios.put(`${API_URL}scholarships/${id}/`, updatedData, {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+    });
+
+    return response.data;
+};
+
+export const deleteScholarship = async (id) => {
+    const response = await axios.delete(`${API_URL}scholarships/${id}/`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+    });
+
+    if (response.status !== 204) {
+        throw new Error('Failed to delete scholarship');
+    }
 };

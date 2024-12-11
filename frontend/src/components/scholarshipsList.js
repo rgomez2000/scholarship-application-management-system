@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getScholarships } from './services/api';
+import {checkIsAdmin, getScholarships} from './services/api';
 import './scholarshipsList.css';
 
 const ScholarshipsList = () => {
@@ -10,6 +10,7 @@ const ScholarshipsList = () => {
         donors: [],
         organizations: [],
     });
+    const [isAdmin, setIsAdmin] = useState(false);
     const [filters, setFilters] = useState({
         renewal_type: '',
         min_amount: '',
@@ -76,13 +77,25 @@ const ScholarshipsList = () => {
                 const data = await getScholarships(filters, sort, currentPage); // Pass currentPage to the API call
                 setScholarships(data.results); // Use `results` from the API response
                 setTotalPages(Math.ceil(data.count / 10)); // Calculate total pages using API's `count`
-                setFilterOptions(data.filter_options);
+                // setFilterOptions(data.filter_options || {});
             } catch (error) {
                 console.error('Error fetching scholarships:', error);
             } finally {
                 setLoading(false); // Set loading state to false after API call
             }
         }
+
+        async function fetchIsAdmin() {
+            const isAdminFlag = await checkIsAdmin();
+            if (!isAdminFlag) {
+                alert("Only admins can be on this page");
+                navigate('/');
+            } else {
+                setIsAdmin(true);
+            }
+        }
+
+        fetchIsAdmin();
         fetchData();
     }, [filters, sort, currentPage]); // Re-fetch data whenever currentPage changes
 
@@ -114,7 +127,8 @@ const ScholarshipsList = () => {
 
     return (
         <div>
-            <h1>Welcome to ScholarAid</h1>
+            <h1>Welcome to ScholarshipAid</h1>
+            {isAdmin && <button onClick={() => navigate('/addScholarship')}>Add Scholarship</button>}
 
             {/* Filters and Sorts */}
             <div>

@@ -147,6 +147,9 @@ class LoginView(APIView):
         if user is not None:
             login(request, user)
 
+            # Get or create token for the user
+            token, created = Token.objects.get_or_create(user=user)
+
             # Get user groups (roles)
             groups = user.groups.values_list('name', flat=True)  # List of group names
 
@@ -155,6 +158,7 @@ class LoginView(APIView):
                 'first_name': user.first_name,  # Include first name in the response
                 'username': user.username,        # Include username as well if needed
                 'groups': list(groups),  # Convert queryset to list
+                'token': token.key
             }, status=status.HTTP_200_OK)
         else:
             return Response({'message': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
