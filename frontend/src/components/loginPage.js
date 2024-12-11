@@ -18,8 +18,7 @@ const LoginPage = () => {
                 password
             });
 
-            // Save the token (assuming JWT)
-            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('token', response.data.token || 'undefined');
             localStorage.setItem('username', response.data.username);
             localStorage.setItem('first_name', response.data.first_name);
 
