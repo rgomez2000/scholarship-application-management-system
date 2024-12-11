@@ -44,10 +44,9 @@ export const getScholarships = async (filters = {}, sort = '', page = 1, pageSiz
 
 export const checkIsAdmin = async () => {
     const token = localStorage.getItem('token');
-    if(token === "undefined") {
+    if(token === "undefined" || !token || token == null) {
         return false;
     }
-    console.log("We have a token");
 
     const response = await axios.get(`${API_URL}restricted/`, {
         headers: {
@@ -55,7 +54,6 @@ export const checkIsAdmin = async () => {
         }
     });
 
-    console.log(response);
     // For now we can just check if there wasn't an error when validating the token
     return response.status === 200;
 };
@@ -63,4 +61,27 @@ export const checkIsAdmin = async () => {
 export const submitApplication = async (applicationData) => {
     const response = await axios.post(`${API_URL}applications/`, applicationData);
     return response.data;
+};
+
+export const updateScholarship = async (id, updatedData) => {
+    const response = await axios.put(`${API_URL}scholarships/${id}/`, updatedData, {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+    });
+
+    return response.data;
+};
+
+export const deleteScholarship = async (id) => {
+    const response = await axios.delete(`${API_URL}scholarships/${id}/`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+    });
+
+    if (response.status !== 204) { // 204 means "No Content", successful deletion
+        throw new Error('Failed to delete scholarship');
+    }
 };
