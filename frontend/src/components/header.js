@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
 import logo from './assets/logo.png';
+import Notifications from "./services/notifications";
 
 
 const Header = () => {
