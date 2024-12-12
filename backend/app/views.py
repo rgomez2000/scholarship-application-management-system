@@ -119,7 +119,7 @@ class RegisterView(APIView):
         if serializer.is_valid():
             user = serializer.save()
 
-            admins = Group.objects.create(name="Admin")
+            admins, created = Group.objects.get_or_create(name="Admin")
             user.groups.add(admins)
 
             token = Token.objects.create(user=user)
