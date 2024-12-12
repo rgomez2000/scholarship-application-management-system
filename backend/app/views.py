@@ -105,6 +105,8 @@ class ScholarshipViewSet(viewsets.ModelViewSet):
         return response
 
 class ApplicationViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
+
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
 
@@ -166,6 +168,23 @@ class UserProfileView(APIView):
             return Response(serializer.data)  # Return the applicant data
         except Applicant.DoesNotExist:
             return Response({"detail": "Applicant data not found."}, status=404)
+
+    def post(self, request, *args, **kwargs):
+        try:
+            user = request.user
+            # request.data.user = user.id
+            data = request.data.copy()
+            data['user'] = user.id
+            print(data)
+            serializer = ApplicantSerializer(data=data)
+
+            if serializer.is_valid():
+                applicant = serializer.save()
+                return Response({"data": "hellow"}, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            # Log the error for debugging purposes if necessary
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]

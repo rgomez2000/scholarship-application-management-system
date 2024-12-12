@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from rest_framework.fields import CurrentUserDefault
+
 from .models import *
 
 class ScholarshipSerializer(serializers.ModelSerializer):
@@ -35,4 +37,4 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 class ApplicantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Applicant
-        fields = ['first_name', 'last_name', 'email', 'phone_number', 'birth_date', 'address1', 'address2', 'gpa', 'academic_level', 'enrollment_status', 'department']
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'birth_date', 'address1', 'address2', 'gpa', 'academic_level', 'enrollment_status', 'department', 'user']
