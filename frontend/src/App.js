@@ -8,6 +8,8 @@ import ScholarshipDetails from './components/scholarshipDetails';
 import ApplicationPage from './components/application';
 import Profile from './components/profilePage';
 import AddScholarship from "./components/addScholarship";
+import ProfilePage from "./components/profilePage";
+import ProfilePageNew from "./components/profilePageNew";
 
 function App() {
   return (
@@ -24,7 +26,7 @@ function App() {
                 <Route path="/scholarship/:id" element={<ScholarshipDetails />} />
                 <Route path="/addScholarship" element={<AddScholarship />}></Route>
                 <Route path="/apply/:id" element={<ApplicationPage />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile" element={<ProfilePageNew />} />
             </Routes>
         
       </div>

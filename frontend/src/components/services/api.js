@@ -25,7 +25,7 @@ export const getScholarships = async (filters = {}, sort = '', page = 1, pageSiz
         
         const response = await axios.get(`${API_URL}scholarships/`, {
             headers: {
-                'Authorization': `Bearer ${token}`,  // Add token to Authorization header
+                'Authorization': `Token ${token}`,  // Add token to Authorization header
             },
             params: {
                 ...filters, // Include filters like renewal_type, date_range_start, etc.
@@ -67,7 +67,7 @@ export const createScholarship = async (createdData) => {
     console.log(createdData);
     const response = await axios.post(`${API_URL}scholarships/`, createdData, {
         headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Token ${localStorage.getItem('token')}`,
         },
     });
 
@@ -82,7 +82,7 @@ export const updateScholarship = async (id, updatedData) => {
     const response = await axios.put(`${API_URL}scholarships/${id}/`, updatedData, {
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Token ${localStorage.getItem('token')}`,
         },
     });
 
@@ -92,11 +92,64 @@ export const updateScholarship = async (id, updatedData) => {
 export const deleteScholarship = async (id) => {
     const response = await axios.delete(`${API_URL}scholarships/${id}/`, {
         headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Token ${localStorage.getItem('token')}`,
         },
     });
 
     if (response.status !== 204) {
         throw new Error('Failed to delete scholarship');
+    }
+};
+
+
+export const getApplications = async (isAdmin, username) => {
+
+    let response = null;
+    if(isAdmin) {
+        response = await axios.get(`${API_URL}applications/`, {
+            headers: {
+                Authorization: `Token ${localStorage.getItem('token')}`,
+            },
+        });
+    } else {
+        response = await axios.get(`${API_URL}applications/${username}/`, {
+            headers: {
+                Authorization: `Token ${localStorage.getItem('token')}`,
+            },
+        });
+    }
+
+    if (response.status !== 200) {
+        throw new Error('Failed to get applications');
+    }
+};
+
+export const getProfile = async () => {
+    const response = await axios.get(`${API_URL}profile/`, {
+        headers: {
+            Authorization: `Token ${localStorage.getItem('token')}`,
+        },
+    });
+
+
+    if (response.status !== 200) {
+        return false
+    } else {
+        return response.data;
+    }
+};
+
+export const createProfile = async (profileData) => {
+    const response = await axios.post(`${API_URL}profile/`, profileData, {
+        headers: {
+            Authorization: `Token ${localStorage.getItem('token')}`,
+        },
+    });
+
+
+    if (response.status !== 200) {
+        return false
+    } else {
+        return response.data;
     }
 };

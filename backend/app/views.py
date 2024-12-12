@@ -128,13 +128,18 @@ class RegisterView(APIView):
         if serializer.is_valid():
             user = serializer.save()
 
+            # Assign user to the Admin group
             admins, created = Group.objects.get_or_create(name="Admin")
             user.groups.add(admins)
 
-            token = Token.objects.create(user=user)
-            return Response({"message": "User registered successfully!", "token": token.key}, status=status.HTTP_201_CREATED)
+            # Get or create token
+            token, created = Token.objects.get_or_create(user=user)
 
-        return Response({'message': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"message": "User registered successfully!", "token": token.key},
+                status=status.HTTP_201_CREATED,)
+        else:
+            return Response({'message': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
     permission_classes = [AllowAny]
