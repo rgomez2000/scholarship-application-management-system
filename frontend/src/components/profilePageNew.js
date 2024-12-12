@@ -128,7 +128,7 @@ const ProfilePageNew = () => {
                             />
                         </label>
                         <label>
-                            Address 1:
+                            Address 2:
                             <input
                                 type="text"
                                 name="address2"

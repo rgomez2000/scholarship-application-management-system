@@ -95,50 +95,8 @@ li {
     color: #000;
 }
 
-.patient_buttons {
-    position: relative;
-    font-size: 18px;
-    color: black;
+.scholarship-title {
     text-decoration: none;
-    font-weight: 550;
-}
-
-.patient_buttons::before {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background: #ff8e3c;
-    transition: .4s;
-}
-
-.patient_buttons:hover::before {
-    width: 100%;
-}
-
-.reports-button {
-    position: relative;
-    font-size: 25px;
-    color: black;
-    text-decoration: none;
-    font-weight: 550;
-}
-
-.reports-button::before {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background: #ff8e3c;
-    transition: .4s;
-}
-
-.reports-button:hover::before {
-    width: 100%;
 }
 
 .pagination {

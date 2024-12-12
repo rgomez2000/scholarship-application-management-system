@@ -252,7 +252,7 @@ const ScholarshipsList = () => {
                             <li key={scholarship.id}>
                                 <hr />
                                 <h2>
-                                    <Link to={`/scholarship/${scholarship.id}`}>{scholarship.scholarship_name}</Link>
+                                    <Link class="scholarship-title" to={`/scholarship/${scholarship.id}`}>{scholarship.scholarship_name}</Link>
                                 </h2>
                                 <p><strong>Amount:</strong> {formatAmount(scholarship.amount)}</p>
                                 <p><strong>Organization:</strong> {scholarship.organization}</p>
@@ -261,6 +261,9 @@ const ScholarshipsList = () => {
                                 {isAuthenticated && (
                                     <button class="scholarships-list-button" onClick={() => handleApply(scholarship.id)}>Apply</button>
                                 )}
+                                <a href={`/scholarship/${scholarship.id}`}>
+                                <button class="scholarships-list-button">View</button>
+                                </a>
                             </li>
                         ))}
                     </ul>
