@@ -61,7 +61,7 @@ const Notifications = () => {
   }
 
   return (
-    <div>
+    <div class="notifications">
       <h3>Notifications:</h3>
       <button onClick={clearNotifications}>Clear All Notifications</button>
       {notifications.length === 0 ? (

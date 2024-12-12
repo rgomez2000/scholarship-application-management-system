@@ -123,7 +123,7 @@ const ScholarshipsList = () => {
 
     return (
         <div>
-            <h1>Welcome to ScholarshipAid</h1>
+            <h1 class="scholarship-list-title">Welcome to ScholarshipAid</h1>
             {isAdmin && <button onClick={() => navigate('/addScholarship')}>Add Scholarship</button>}
             <Notifications />
             {/* Filters and Sorts */}
