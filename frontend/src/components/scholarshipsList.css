@@ -159,6 +159,10 @@ li {
     font-size: 16px; 
 }
 
+.page-span {
+    font-weight: bold;
+}
+
 /* SEARCH BAR CONTAINER  */
 .search-bar-container {
     display: flex;

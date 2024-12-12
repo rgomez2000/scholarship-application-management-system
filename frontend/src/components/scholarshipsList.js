@@ -123,7 +123,7 @@ const ScholarshipsList = () => {
 
     return (
         <div class="scholarships-list-main-div">
-            <h1 class="scholarship-list-title">Welcome to ScholarshipAid</h1>
+            <h1 class="scholarship-list-title">Welcome to ScholarAid</h1>
             {/* Filters and Sorts */}
             <div>
             <div class="search-filter-container">
@@ -267,15 +267,17 @@ const ScholarshipsList = () => {
                     <hr />
                     <div className="pagination"> {/* Pagination controls */}
                         <button
+                            class="scholarships-list-button"
                             onClick={() => handlePageChange(currentPage - 1)} // Navigate to the previous page
                             disabled={currentPage === 1} // Disable if on the first page
                         >
                             Previous
                         </button>
-                        <span>
+                        <span class="page-span">
                             Page {currentPage} of {totalPages} {/* Display current page info */}
                         </span>
                         <button
+                            class="scholarships-list-button"
                             onClick={() => handlePageChange(currentPage + 1)} // Navigate to the next page
                             disabled={currentPage === totalPages} // Disable if on the last page
                         >
