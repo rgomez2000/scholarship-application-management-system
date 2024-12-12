@@ -45,9 +45,8 @@ const Header = () => {
                 </div>
                 <span className="divider"></span>
                 <div class="header-section navigation">
-                    <a onClick={handleHomeClick} className="nav-link">Home</a>
-                    {isAuthenticated && <a onClick={handleApplicationsClick} className="nav-link">Applications</a>}
-                    <Notifications/>
+                    <a href="" onClick={handleHomeClick} className="nav-link">Home</a>
+                    {isAuthenticated && <a href="" onClick={handleApplicationsClick} className="nav-link">Applications</a>}
                 </div>
 
                 <div class="header-section auth-links">

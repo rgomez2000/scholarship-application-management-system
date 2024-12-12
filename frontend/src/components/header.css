@@ -1,6 +1,7 @@
 * {
     text-decoration: none;
 }
+
 .header-body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -12,11 +13,6 @@
     font-family: "Poppins", sans-serif;
 }
 
-#content {
-    flex-grow: 1;
-    padding: 20px;
-    overflow: auto;
-}
 
 .header {
     top: 0;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { checkIsAdmin, createScholarship } from './services/api';
 import './scholarshipDetails.css';
+import './addScholarship.css';
 
 const ScholarshipDetails = () => {
     const [scholarship, setScholarship] = useState({
@@ -63,10 +64,10 @@ const ScholarshipDetails = () => {
 
     return (
         <div>
-            <h1>{'Create Scholarship'}</h1>
             {isAdmin && (
-                <div>
-                    <form>
+                <div class="form-container"> 
+                    <h1>{'Create Scholarship'}</h1>
+                    <form class="form-group">
                         <label>
                             Scholarship Name:
                             <input
@@ -137,8 +138,9 @@ const ScholarshipDetails = () => {
                                 onChange={handleInputChange}
                             />
                         </label>
+                        <button class="form-container-button" onClick={handleCreate}>Create Scholarship</button>
                     </form>
-                    <button onClick={handleCreate}>Create Scholarship</button>
+                    
                 </div>
             )}
         </div>

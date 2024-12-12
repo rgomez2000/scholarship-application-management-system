@@ -122,10 +122,8 @@ const ScholarshipsList = () => {
     };
 
     return (
-        <div>
+        <div class="scholarships-list-main-div">
             <h1 class="scholarship-list-title">Welcome to ScholarshipAid</h1>
-            {isAdmin && <button onClick={() => navigate('/addScholarship')}>Add Scholarship</button>}
-            <Notifications />
             {/* Filters and Sorts */}
             <div>
             <div class="search-filter-container">
@@ -243,7 +241,8 @@ const ScholarshipsList = () => {
 
             </div>
         </div>
-
+        <div class="add-scholarship-button-div">{isAdmin && <button  class="add-scholarship-button" onClick={() => navigate('/addScholarship')}>Add Scholarship</button>}</div>
+        <div class="notifications-element"><Notifications /></div>
             {loading ? ( // New: Show a loading message while fetching data
                 <p>Loading scholarships...</p>
             ) : (

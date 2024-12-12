@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';  // Change to useNavigate
-import './registerPage.css'
+import './registerPage.css';
 
 const Register = () => {
     const [formData, setFormData] = useState({

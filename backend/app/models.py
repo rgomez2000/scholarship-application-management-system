@@ -49,13 +49,13 @@ class Scholarship(models.Model):
     
 class Applicant(models.Model):
     ACADEMIC_LEVEL = [
-        ("GRAD", "Graduate"),
-        ("UNDER", "Undergradute"),
-        ("HS", "High School"),
+        ("Graduate", "Graduate"),
+        ("Undergraduate", "Undergradute"),
+        ("high_school", "High School"),
     ]
     ENROLL_STATUS = [
-        ("FT", "Full Time"),
-        ("PT", "Part Time"),
+        ("full_time", "Full Time"),
+        ("part_time", "Part Time"),
     ]
     # scholarship = models.ForeignKey(Scholarship, on_delete=models.CASCADE,null=True, blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=False)

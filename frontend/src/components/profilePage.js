@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import "./profilePage.css";
 
 const Profile = () => {
     const [registerMessage, setRegisterMessage] = useState('');
@@ -49,7 +50,7 @@ const Profile = () => {
     }
 
     return (
-        <div>
+        <div class="form-container">
             <h2>Profile</h2>
             {registerMessage && <p style={{ color: 'green' }}>{registerMessage}</p>}
             

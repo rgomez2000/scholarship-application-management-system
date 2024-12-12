@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {getProfile, createProfile} from './services/api';
 import './scholarshipDetails.css';
+import "./profilePageNew.css";
 
 const ProfilePageNew = () => {
     const { id } = useParams(); // Get the scholarship ID from the URL
@@ -67,8 +68,9 @@ const ProfilePageNew = () => {
     return (
         <div>
             {!hasProfile ? (
-                <div>
-                    <form>
+                <div class="form-container">
+                    <form class="form-group">
+                        <h2>Create a User Profile</h2>
                         <label>
                             First Name:
                             <input
@@ -99,13 +101,15 @@ const ProfilePageNew = () => {
                         <label>
                             Phone Number:
                             <input
-                                type="text"
+                                type="tel"
                                 name="phone_number"
+                                placeholder="e.g., +1-234-567-8900"
+                                pattern="^\+?[1-9]\d{1,14}$" title="Enter a valid phone number with country code."
                                 value={profile.phone_number}
                                 onChange={handleInputChange}
                             />
                         </label>
-                        <label>
+                        <label for="date">
                             Birth Date:
                             <input
                                 type="text"
@@ -135,30 +139,41 @@ const ProfilePageNew = () => {
                         <label>
                             GPA:
                             <input
-                                type="text"
+                                type="number"
                                 name="gpa"
+                                step="0.01"
+                                min="0.00"
+                                max="4.00"
+                                placeholder="e.g., 3.75"
                                 value={profile.gpa}
                                 onChange={handleInputChange}
                             />
                         </label>
                         <label>
                             Academic Level:
-                            <input
-                                type="text"
-                                name="academic_level"
-                                value={profile.academic_level}
-                                onChange={handleInputChange}
-                            />
+                            <select id="academic-level" 
+                            name="academic_level"
+                            value={profile.academic_level}
+                            onChange={handleInputChange}
+                            >
+                                <option value="" disabled selected>Select your status</option>
+                                <option value="high_school">High School</option>
+                                <option value="undergraduate">Undergraduate</option>
+                                <option value="graduate">Graduate</option>
+                            </select>
                         </label>
                         <label>
                             Enrollment Status:
-                            <input
-                                type="text"
-                                name="enrollment_status"
-                                value={profile.enrollment_status}
-                                onChange={handleInputChange}
-                            />
-                        </label>Department:
+                            <select id="enrollment-status" 
+                            name="enrollment_status"
+                            value={profile.enrollment_status}
+                            onChange={handleInputChange}
+                            >
+                                <option value="" disabled selected>Select your level</option>
+                                <option value="part_time">Part Time</option>
+                                <option value="full_time">Full Time</option>
+                            </select>
+                        </label>
                         <label>
                             Department:
                             <input
@@ -170,14 +185,14 @@ const ProfilePageNew = () => {
                         </label>
 
                     </form>
-                    <button onClick={handleCreate}>Create Profile</button>
+                    <button class="form-container-button" onClick={handleCreate}>Create Profile</button>
                 </div>
             ) : (
                 <div>
-                    <h2>Profile</h2>
                     {/*{registerMessage && <p style={{color: 'green'}}>{registerMessage}</p>}*/}
 
-                    <div>
+                    <div class="form-container">
+                        <h2>Profile</h2>
                         <p><strong>First Name:</strong> {profile.first_name}</p>
                         <p><strong>Last Name:</strong> {profile.last_name}</p>
                         <p><strong>Email:</strong> {profile.email}</p>

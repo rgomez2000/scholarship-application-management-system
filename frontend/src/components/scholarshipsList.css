@@ -2,12 +2,12 @@
     list-style-type: none;
 }
 
-.scholarships-list-title {
+.scholarship-list-title {
     margin-bottom: 1.0rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    text-align: center !important;
 }
 
 h2 {
@@ -48,6 +48,31 @@ li {
     color: #fff;
     background-color: #007bff;
     white-space: nowrap;
+}
+
+.add-scholarship-button {
+    align-items: center;
+    width: 8rem;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: #007bff 0.3s;
+    color: #fff;
+    background-color: #007bff;
+}
+
+.add-scholarship-button-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center !important;
+}
+
+.add-scholarship-button:hover {
+    background-color: #218cfd;
 }
 
 .scholarships-list-button:hover {
@@ -265,3 +290,13 @@ li {
 .date-container input[type="date"]:hover {
     cursor: pointer;
 }
+
+.notifications-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center !important;
+}
+
+
+

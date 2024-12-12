@@ -15,8 +15,8 @@ const ApplicationPage = () => {
         address1: '',
         address2: '',
         gpa: '',
-        academic_level: 'GRAD',
-        enrollment_status: 'FT',
+        academic_level: 'Graduate',
+        enrollment_status: 'Full Time',
         department: '',
         SoP: null // Statement of Purpose (File)
     });
