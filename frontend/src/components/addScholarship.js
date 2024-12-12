@@ -4,7 +4,6 @@ import { checkIsAdmin, createScholarship } from './services/api';
 import './scholarshipDetails.css';
 
 const ScholarshipDetails = () => {
-    const { id } = useParams(); // Get the scholarship ID from the URL
     const [scholarship, setScholarship] = useState({
         scholarship_name: '',
         amount: '',

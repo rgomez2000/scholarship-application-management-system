@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {checkIsAdmin, getScholarships} from './services/api';
 import './scholarshipsList.css';
+import Notifications from "./services/notifications.js";
 
 const ScholarshipsList = () => {
     const [scholarships, setScholarships] = useState([]);
-    const [filterOptions, setFilterOptions] = useState({
+    const [filterOptions] = useState({
         departments: [],
         donors: [],
         organizations: [],
@@ -124,7 +125,7 @@ const ScholarshipsList = () => {
         <div>
             <h1>Welcome to ScholarshipAid</h1>
             {isAdmin && <button onClick={() => navigate('/addScholarship')}>Add Scholarship</button>}
-
+            <Notifications />
             {/* Filters and Sorts */}
             <div>
             <div class="search-filter-container">
