@@ -87,12 +87,7 @@ const ScholarshipsList = () => {
 
         async function fetchIsAdmin() {
             const isAdminFlag = await checkIsAdmin();
-            if (!isAdminFlag) {
-                alert("Only admins can be on this page");
-                navigate('/');
-            } else {
-                setIsAdmin(true);
-            }
+            setIsAdmin(isAdminFlag);
         }
 
         fetchIsAdmin();
