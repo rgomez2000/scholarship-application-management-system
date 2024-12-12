@@ -5,11 +5,14 @@ import ScholarshipsList from './components/scholarshipsList';
 import LoginPage from './components/loginPage'; 
 import RegisterPage from './components/registerPage';
 import ScholarshipDetails from './components/scholarshipDetails';
-import ApplicationPage from './components/application';
+import ApplicationPage from './components/applicationDetails';
 import Profile from './components/profilePage';
 import AddScholarship from "./components/addScholarship";
 import ProfilePage from "./components/profilePage";
 import ProfilePageNew from "./components/profilePageNew";
+import ApplicationsList from "./components/applicationsList";
+import AddApplication from "./components/addApplication";
+import ApplicationDetails from "./components/applicationDetails";
 
 function App() {
   return (
@@ -25,8 +28,10 @@ function App() {
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/scholarship/:id" element={<ScholarshipDetails />} />
                 <Route path="/addScholarship" element={<AddScholarship />}></Route>
-                <Route path="/apply/:id" element={<ApplicationPage />} />
+                <Route path="/apply/:id" element={<AddApplication />} />
                 <Route path="/profile" element={<ProfilePageNew />} />
+                <Route path="/applications" element={<ApplicationsList />} />
+                <Route path="/applications/:id" element={<ApplicationDetails />} />
             </Routes>
         
       </div>

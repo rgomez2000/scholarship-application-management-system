@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
 import logo from './assets/logo.png';
+import Notifications from "./services/notifications";
 
 
 const Header = () => {
@@ -30,6 +31,11 @@ const Header = () => {
         }
     };
 
+    // Handle click on Home, redirect to /apply if authenticated
+    const handleApplicationsClick = () => {
+        navigate('/applications');
+    };
+
 
     return (
         <body class="header-body">
@@ -39,7 +45,9 @@ const Header = () => {
                 </div>
                 <span className="divider"></span>
                 <div class="header-section navigation">
-                    <a href="/" onClick={handleHomeClick} class="nav-link">Home</a>
+                    <a onClick={handleHomeClick} className="nav-link">Home</a>
+                    {isAuthenticated && <a onClick={handleApplicationsClick} className="nav-link">Applications</a>}
+                    <Notifications/>
                 </div>
 
                 <div class="header-section auth-links">

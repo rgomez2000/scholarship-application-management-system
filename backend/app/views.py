@@ -114,10 +114,60 @@ class ScholarshipViewSet(viewsets.ModelViewSet):
         return response
 
 class ApplicationViewSet(viewsets.ModelViewSet):
-    permission_classes = [AllowAny]
-
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
+    permission_classes = [IsAuthenticated]
+
+    def list(self, request, *args, **kwargs):
+        """
+        List applications. If `isAdmin` query parameter is true, return all applications.
+        Otherwise, return applications for the current authenticated user.
+        """
+        is_admin = request.query_params.get('is_admin', 'false').lower() == 'true'
+        user = request.user
+
+        try:
+            if is_admin:
+                # Return all applications if the user has admin privileges
+                applications = self.queryset
+            else:
+                # Fetch applications for the logged-in user
+                applicant = Applicant.objects.get(user=user)
+                applications = self.queryset.filter(applicant=applicant)
+
+            # Serialize the data
+            serializer = self.get_serializer(applications, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Applicant.DoesNotExist:
+            return Response({'error': 'Applicant not found for the current user.'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def create(self, request, *args, **kwargs):
+        try:
+            # Get the authenticated user
+            user = request.user
+
+            # Fetch the corresponding applicant
+            applicant = Applicant.objects.get(user=user)
+
+            # Add the applicant to the request data
+            request.data['applicant'] = applicant.id
+
+            # Create the application using the serializer
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            self.perform_create(serializer)
+
+            # Return the response
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        except Applicant.DoesNotExist:
+            return Response({'error': 'Applicant not found for the current user.'}, status=status.HTTP_404_NOT_FOUND)
+        except Scholarship.DoesNotExist:
+            return Response({'error': 'Scholarship not found.'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class RegisterView(APIView):
     permission_classes = [AllowAny]

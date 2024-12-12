@@ -24,6 +24,13 @@ class ApplicationSerializer(serializers.ModelSerializer):
         model = Application
         fields = '__all__'
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['scholarship'] = ScholarshipSerializer(instance.scholarship).data
+        representation['applicant'] = ApplicantSerializer(instance.applicant).data
+
+        return representation
+
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)

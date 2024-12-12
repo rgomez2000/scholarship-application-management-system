@@ -43,15 +43,17 @@ const ApplicationPage = () => {
         for (let key in applicationData) {
             formData.append(key, applicationData[key]);
         }
+        formData.append('scholarship', id);
+        formData.append('status', 'submitted');
 
         try {
             // Submit the application for the scholarship
             const response = await axios.post(
-                `http://localhost:8000/api/apply/${id}/`,
+                `http://localhost:8000/api/applications/`,
                 formData,
                 {
                     headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                        'Authorization': `Token ${localStorage.getItem('token')}`,
                         'Content-Type': 'multipart/form-data'
                     }
                 }
