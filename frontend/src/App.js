@@ -12,6 +12,7 @@ import ProfilePage from "./components/profilePage";
 import ProfilePageNew from "./components/profilePageNew";
 import ApplicationsList from "./components/applicationsList";
 import AddApplication from "./components/addApplication";
+import ApplicationDetails from "./components/applicationDetails";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/apply/:id" element={<AddApplication />} />
                 <Route path="/profile" element={<ProfilePageNew />} />
                 <Route path="/applications" element={<ApplicationsList />} />
+                <Route path="/applications/:id" element={<ApplicationDetails />} />
             </Routes>
         
       </div>

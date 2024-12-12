@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {getApplications} from './services/api';
+import {Link} from "react-router-dom";
 // import './applicationsList.css';
 
 const ApplicationsList = () => {
@@ -45,6 +46,7 @@ const ApplicationsList = () => {
                         {applications.map((application) => (
                             <li key={application.id}>
                                 <hr/>
+                                <Link to={`/applications/${application.id}`}>Go to application</Link>
                                 <p><strong>Scholarship Name:</strong> {application.scholarship.scholarship_name}</p>
                                 <p><strong>Amount:</strong> {application.scholarship.amount}</p>
                                 <p><strong>Status:</strong> {application.status}</p>

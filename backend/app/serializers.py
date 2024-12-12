@@ -27,6 +27,8 @@ class ApplicationSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['scholarship'] = ScholarshipSerializer(instance.scholarship).data
+        representation['applicant'] = ApplicantSerializer(instance.applicant).data
+
         return representation
 
 class UserRegistrationSerializer(serializers.ModelSerializer):

@@ -101,36 +101,15 @@ export const deleteScholarship = async (id) => {
     }
 };
 
-//
-// export const getApplications = async (isAdmin, username) => {
-//
-//     let response = null;
-//     if(isAdmin) {
-//         response = await axios.get(`${API_URL}applications/`, {
-//             headers: {
-//                 Authorization: `Token ${localStorage.getItem('token')}`,
-//             },
-//         });
-//     } else {
-//         response = await axios.get(`${API_URL}applications/${username}/`, {
-//             headers: {
-//                 Authorization: `Token ${localStorage.getItem('token')}`,
-//             },
-//         });
-//     }
-//
-//     if (response.status !== 200) {
-//         throw new Error('Failed to get applications');
-//     }
-// };
-
 export const getApplication = async (id) => {
-
+    console.log("HELLO WORLD ", id)
     const response = await axios.get(`${API_URL}applications/${id}/`, {
-            headers: {
-                Authorization: `Token ${localStorage.getItem('token')}`,
-            },
-        });
+        headers: {
+            Authorization: `Token ${localStorage.getItem('token')}`,
+        },
+    });
+
+    console.log(response.data)
 
     if (response.status !== 200) {
         throw new Error('Failed to get application');
@@ -204,4 +183,19 @@ export const createProfile = async (profileData) => {
     } else {
         return response.data;
     }
+};
+
+export const updateApplication = async (id, applicationData) => {
+
+    const response = await axios.patch(`${API_URL}applications/${id}/`, applicationData, {
+        headers: {
+            Authorization: `Token ${localStorage.getItem('token')}`,
+        },
+    });
+
+    if (response.status !== 200) {
+        throw new Error('Failed to update application');
+    }
+
+    return response.data;
 };
