@@ -57,8 +57,8 @@ class Applicant(models.Model):
         ("FT", "Full Time"),
         ("PT", "Part Time"),
     ]
-    scholarship = models.ForeignKey(Scholarship, on_delete=models.CASCADE,null=True, blank=False)
-    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True, blank=False)
+    # scholarship = models.ForeignKey(Scholarship, on_delete=models.CASCADE,null=True, blank=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=False)
     email = models.EmailField(unique=True)
     phone_number = PhoneNumberField(unique=True, null=True, blank=False)
     first_name = models.CharField(max_length=32, null=True, blank=False)
