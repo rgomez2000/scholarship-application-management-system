@@ -264,7 +264,7 @@ const ScholarshipsList = () => {
                                 <p><strong>Department:</strong> {scholarship.department}</p>
                                 <p><strong>Apply Between:</strong> {new Date(scholarship.open_date).toLocaleDateString()} - {new Date(scholarship.deadline).toLocaleDateString()}</p>
                                 {isAuthenticated && (
-                                    <button onClick={() => handleApply(scholarship.id)}>Apply</button>
+                                    <button class="scholarships-list-button" onClick={() => handleApply(scholarship.id)}>Apply</button>
                                 )}
                             </li>
                         ))}

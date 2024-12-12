@@ -124,7 +124,7 @@ const ScholarshipDetails = () => {
                     {isAdmin && <button onClick={handleEdit}>Edit</button>}
                     {isAdmin && (
                         <>
-                            <button onClick={() => setConfirmDelete(true)}>Delete</button>
+                            <button class="scholarship-details-button" onClick={() => setConfirmDelete(true)}>Delete</button>
                             {confirmDelete && (
                                 <div>
                                     <p>Are you sure you want to delete this scholarship?</p>
