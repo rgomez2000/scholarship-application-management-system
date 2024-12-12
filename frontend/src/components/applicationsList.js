@@ -15,7 +15,7 @@ const ApplicationsList = () => {
                 setLoading(true); // Set loading state to true before API call
                 const data = await getApplications(true, currentPage); // Pass currentPage to the API call
                 setApplications(data); // Use `results` from the API response
-                setTotalPages(Math.ceil(data.count / 10)); // Calculate total pages using API's `count`
+                setTotalPages(Math.ceil(data.length / 10));
 
             } catch (error) {
                 console.error('Error fetching scholarships:', error);
@@ -45,7 +45,8 @@ const ApplicationsList = () => {
                         {applications.map((application) => (
                             <li key={application.id}>
                                 <hr/>
-
+                                <p><strong>Scholarship Name:</strong> {application.scholarship.scholarship_name}</p>
+                                <p><strong>Amount:</strong> {application.scholarship.amount}</p>
                                 <p><strong>Status:</strong> {application.status}</p>
                                 <p><strong>Submitted On:</strong> {application.submitted_on}</p>
                             </li>

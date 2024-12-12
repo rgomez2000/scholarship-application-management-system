@@ -139,10 +139,10 @@ export const getApplication = async (id) => {
     return response.data;
 };
 
-export const getApplications = async (isAdmin, page = 1, pageSize = 10) => {
+export const getApplications = async (page = 1, pageSize = 10) => {
     try {
         const token = localStorage.getItem('token');  // Retrieve token from localStorage
-
+        const isAdmin = await checkIsAdmin();
         const response = await axios.get( `${API_URL}applications/`, {
             headers: {
                 'Authorization': `Token ${token}`,
