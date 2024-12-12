@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import './notifications.css'
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -60,7 +61,7 @@ const Notifications = () => {
   }
 
   return (
-    <div>
+    <div class="notifications">
       <h3>Notifications:</h3>
       <button onClick={clearNotifications}>Clear All Notifications</button>
       {notifications.length === 0 ? (

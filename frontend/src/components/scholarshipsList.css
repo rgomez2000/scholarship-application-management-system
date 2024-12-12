@@ -2,8 +2,12 @@
     list-style-type: none;
 }
 
-h1 {
+.scholarships-list-title {
     margin-bottom: 1.0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 h2 {

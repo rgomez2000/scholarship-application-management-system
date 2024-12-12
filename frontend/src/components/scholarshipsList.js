@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {checkIsAdmin, getScholarships} from './services/api';
 import './scholarshipsList.css';
+import Notifications from "./services/notifications.js";
 
 const ScholarshipsList = () => {
     const [scholarships, setScholarships] = useState([]);
-    const [filterOptions, setFilterOptions] = useState({
+    const [filterOptions] = useState({
         departments: [],
         donors: [],
         organizations: [],
@@ -87,12 +88,7 @@ const ScholarshipsList = () => {
 
         async function fetchIsAdmin() {
             const isAdminFlag = await checkIsAdmin();
-            if (!isAdminFlag) {
-                alert("Only admins can be on this page");
-                navigate('/');
-            } else {
-                setIsAdmin(true);
-            }
+            setIsAdmin(isAdminFlag);
         }
 
         fetchIsAdmin();
@@ -127,9 +123,9 @@ const ScholarshipsList = () => {
 
     return (
         <div>
-            <h1>Welcome to ScholarshipAid</h1>
+            <h1 class="scholarship-list-title">Welcome to ScholarshipAid</h1>
             {isAdmin && <button onClick={() => navigate('/addScholarship')}>Add Scholarship</button>}
-
+            <Notifications />
             {/* Filters and Sorts */}
             <div>
             <div class="search-filter-container">

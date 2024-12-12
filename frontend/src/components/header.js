@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
 import logo from './assets/logo.png';
-import Notifications from "./services/notifications.js";
+
 
 const Header = () => {
     const navigate = useNavigate();
@@ -40,7 +40,6 @@ const Header = () => {
                 <span className="divider"></span>
                 <div class="header-section navigation">
                     <a href="/" onClick={handleHomeClick} class="nav-link">Home</a>
-                    <Notifications />
                 </div>
 
                 <div class="header-section auth-links">
