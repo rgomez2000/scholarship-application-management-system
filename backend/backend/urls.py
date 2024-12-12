@@ -38,7 +38,7 @@ urlpatterns = [
     path('api/token/', CustomAuthToken.as_view(), name='api_token_auth'),
     path('api/restricted/', RestrictedView.as_view(), name='restricted'),
     path('api/notifications/', NotificationListView.as_view(), name='notifications'),
-     path('api/notifications/clear/', ClearNotificationsView.as_view(), name='clear_notifications'),
+    path('api/notifications/clear/', ClearNotificationsView.as_view(), name='clear_notifications'),
 ]
 
 # Serve media files during development
