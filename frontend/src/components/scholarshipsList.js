@@ -241,7 +241,6 @@ const ScholarshipsList = () => {
 
             </div>
         </div>
-        <div class="add-scholarship-button-div">{isAdmin && <button  class="add-scholarship-button" onClick={() => navigate('/addScholarship')}>Add Scholarship</button>}</div>
         <div class="notifications-element"><Notifications /></div>
             {loading ? ( // New: Show a loading message while fetching data
                 <p>Loading scholarships...</p>
