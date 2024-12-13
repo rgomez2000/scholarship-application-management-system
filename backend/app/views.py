@@ -128,12 +128,12 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 
         try:
             if is_admin:
-                # Return all applications if the user has admin privileges
-                applications = self.queryset
+                # Fetch all applications freshly from the database
+                applications = Application.objects.all()
             else:
                 # Fetch applications for the logged-in user
                 applicant = Applicant.objects.get(user=user)
-                applications = self.queryset.filter(applicant=applicant)
+                applications = Application.objects.filter(applicant=applicant)
 
             # Serialize the data
             serializer = self.get_serializer(applications, many=True)
