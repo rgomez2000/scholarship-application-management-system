@@ -49,8 +49,8 @@ class Scholarship(models.Model):
     
 class Applicant(models.Model):
     ACADEMIC_LEVEL = [
-        ("Graduate", "Graduate"),
-        ("Undergraduate", "Undergradute"),
+        ("graduate", "Graduate"),
+        ("undergraduate", "Undergradute"),
         ("high_school", "High School"),
     ]
     ENROLL_STATUS = [

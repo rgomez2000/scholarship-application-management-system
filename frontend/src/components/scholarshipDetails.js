@@ -77,64 +77,85 @@ const ScholarshipDetails = () => {
     return (
         <div>
             {isEditing ? (
-                <div>
-                    <input
-                        type="text"
-                        value={editableScholarship.scholarship_name}
-                        onChange={(e) => handleFieldChange('scholarship_name', e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        value={editableScholarship.amount}
-                        onChange={(e) => handleFieldChange('amount', e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        value={editableScholarship.organization}
-                        onChange={(e) => handleFieldChange('organization', e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        value={editableScholarship.department}
-                        onChange={(e) => handleFieldChange('department', e.target.value)}
-                    />
-                    <textarea
-                        value={editableScholarship.description}
-                        onChange={(e) => handleFieldChange('description', e.target.value)}
-                    />
-                    <textarea
-                        value={editableScholarship.additional_info}
-                        onChange={(e) => handleFieldChange('additional_info', e.target.value)}
-                    />
-                    <button onClick={handleSave}>Save</button>
-                    <button onClick={() => setIsEditing(false)}>Cancel</button>
+                <div class="form-container">
+                    <h2>Edit Scholarship Details</h2>
+                    <div class="form-group">
+                        <div>
+                        <label>Scholarship Title:</label>
+                        <input
+                            type="text"
+                            value={editableScholarship.scholarship_name}
+                            onChange={(e) => handleFieldChange('scholarship_name', e.target.value)}
+                        />
+                        </div>
+                        <div>
+                        <label>Username:</label>
+                        <input
+                            type="text"
+                            value={editableScholarship.amount}
+                            onChange={(e) => handleFieldChange('amount', e.target.value)}
+                        />
+                        </div>
+                        <div>
+                        <label>Username:</label>
+                        <input
+                            type="text"
+                            value={editableScholarship.organization}
+                            onChange={(e) => handleFieldChange('organization', e.target.value)}
+                        />
+                        </div>
+                        <div>
+                        <label>Username:</label>
+                        <input
+                            type="text"
+                            value={editableScholarship.department}
+                            onChange={(e) => handleFieldChange('department', e.target.value)}
+                        />
+                        </div>
+                        <div>
+                        <label>Username:</label>
+                        <textarea
+                            value={editableScholarship.description}
+                            onChange={(e) => handleFieldChange('description', e.target.value)}
+                        />
+                        </div>
+                        <div>
+                        <label>Username:</label>
+                        <textarea
+                            value={editableScholarship.additional_info}
+                            onChange={(e) => handleFieldChange('additional_info', e.target.value)}
+                        />
+                        </div>
+                    </div>
+                    <button class="form-container-button" onClick={handleSave}>Save</button>
+                    <button class="form-container-button" onClick={() => setIsEditing(false)}>Cancel</button>
                 </div>
             ) : (
-                <div>
-                    <h1>{scholarship.scholarship_name}</h1>
-                    <p><strong>Amount:</strong> {scholarship.amount}</p>
-                    <p><strong>Organization:</strong> {scholarship.organization}</p>
-                    <p><strong>Department:</strong> {scholarship.department}</p>
-                    <p><strong>Apply Between:</strong> {new Date(scholarship.open_date).toLocaleDateString()} - {new Date(scholarship.deadline).toLocaleDateString()}</p>
-                    <h3>Description</h3>
-                    <p>{scholarship.description}</p>
-                    <h3>Additional Info</h3>
-                    <p>{scholarship.additional_info}</p>
-                    {isAuthenticated && <button onClick={() => handleApply(scholarship.id)}>Apply</button>}
-                    {isAdmin && <button onClick={handleEdit}>Edit</button>}
-                    {isAdmin && (
-                        <>
-                            <button class="scholarship-details-button" onClick={() => setConfirmDelete(true)}>Delete</button>
-                            {confirmDelete && (
-                                <div>
-                                    <p>Are you sure you want to delete this scholarship?</p>
-                                    <button onClick={handleDelete}>Confirm</button>
-                                    <button onClick={() => setConfirmDelete(false)}>Cancel</button>
-                                </div>
-                            )}
-                        </>
-                    )}
-                </div>
+                    <div>
+                        <h1>{scholarship.scholarship_name}</h1>
+                        <p><strong>Amount:</strong> {scholarship.amount}</p>
+                        <p><strong>Organization:</strong> {scholarship.organization}</p>
+                        <p><strong>Department:</strong> {scholarship.department}</p>
+                        <p><strong>Apply Between:</strong> {new Date(scholarship.open_date).toLocaleDateString()} - {new Date(scholarship.deadline).toLocaleDateString()}</p>
+                        <h3>Description</h3>
+                        <p>{scholarship.description}</p>
+                        <h3>Additional Info</h3>
+                        <p>{scholarship.additional_info}</p>
+                        {isAuthenticated && <button class="scholarship-details-button" onClick={() => handleApply(scholarship.id)}>Apply</button>}
+                        {isAdmin && <button class="scholarship-details-button" onClick={handleEdit}>Edit</button>}
+                        {isAdmin && (
+                            <>
+                                <button class="scholarship-details-button" onClick={() => setConfirmDelete(true)}>Delete</button>
+                                {confirmDelete && (
+                                    <div>
+                                        <p>Are you sure you want to delete this scholarship?</p>
+                                        <button class="scholarship-details-button" onClick={handleDelete}>Confirm</button>
+                                        <button class="scholarship-details-button" onClick={() => setConfirmDelete(false)}>Cancel</button>
+                                    </div>
+                                )}
+                            </>
+                        )}
+                    </div>
             )}
         </div>
     );

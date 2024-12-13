@@ -92,159 +92,162 @@ const ApplicationPage = () => {
                     <p><strong>Department:</strong> {scholarship.department}</p>
                     <p><strong>Apply Between:</strong> {new Date(scholarship.open_date).toLocaleDateString()} - {new Date(scholarship.deadline).toLocaleDateString()}</p>
                     <hr></hr>
-                    <form onSubmit={handleApplicationSubmit}>
-                        {/* Form Fields for Applicant */}
-                        <div>
-                            <label htmlFor="first_name">First Name:</label>
-                            <input
-                                type="text"
-                                id="first_name"
-                                name="first_name"
-                                value={applicationData.first_name}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                    <div class="form-container">
+                        <form class="form-group" onSubmit={handleApplicationSubmit}>
+                            <h2>Submit An Application</h2>
+                            
+                            <div>
+                                <label htmlFor="first_name">First Name:</label>
+                                <input
+                                    type="text"
+                                    id="first_name"
+                                    name="first_name"
+                                    value={applicationData.first_name}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-                        <div>
-                            <label htmlFor="last_name">Last Name:</label>
-                            <input
-                                type="text"
-                                id="last_name"
-                                name="last_name"
-                                value={applicationData.last_name}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div>
+                                <label htmlFor="last_name">Last Name:</label>
+                                <input
+                                    type="text"
+                                    id="last_name"
+                                    name="last_name"
+                                    value={applicationData.last_name}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-                        <div>
-                            <label htmlFor="email">Email:</label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                value={applicationData.email}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div>
+                                <label htmlFor="email">Email:</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value={applicationData.email}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-                        <div>
-                            <label htmlFor="phone_number">Phone Number:</label>
-                            <input
-                                type="text"
-                                id="phone_number"
-                                name="phone_number"
-                                value={applicationData.phone_number}
-                                onChange={handleChange}
-                            />
-                        </div>
+                            <div>
+                                <label htmlFor="phone_number">Phone Number:</label>
+                                <input
+                                    type="text"
+                                    id="phone_number"
+                                    name="phone_number"
+                                    value={applicationData.phone_number}
+                                    onChange={handleChange}
+                                />
+                            </div>
 
-                        <div>
-                            <label htmlFor="birth_date">Birth Date:</label>
-                            <input
-                                type="date"
-                                id="birth_date"
-                                name="birth_date"
-                                value={applicationData.birth_date}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div>
+                                <label htmlFor="birth_date">Birth Date:</label>
+                                <input
+                                    type="date"
+                                    id="birth_date"
+                                    name="birth_date"
+                                    value={applicationData.birth_date}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-                        <div>
-                            <label htmlFor="address1">Address 1:</label>
-                            <input
-                                type="text"
-                                id="address1"
-                                name="address1"
-                                value={applicationData.address1}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div>
+                                <label htmlFor="address1">Address 1:</label>
+                                <input
+                                    type="text"
+                                    id="address1"
+                                    name="address1"
+                                    value={applicationData.address1}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-                        <div>
-                            <label htmlFor="address2">Address 2:</label>
-                            <input
-                                type="text"
-                                id="address2"
-                                name="address2"
-                                value={applicationData.address2}
-                                onChange={handleChange}
-                            />
-                        </div>
+                            <div>
+                                <label htmlFor="address2">Address 2:</label>
+                                <input
+                                    type="text"
+                                    id="address2"
+                                    name="address2"
+                                    value={applicationData.address2}
+                                    onChange={handleChange}
+                                />
+                            </div>
 
-                        <div>
-                            <label htmlFor="gpa">GPA:</label>
-                            <input
-                                type="number"
-                                step="0.01"
-                                id="gpa"
-                                name="gpa"
-                                value={applicationData.gpa}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div>
+                                <label htmlFor="gpa">GPA:</label>
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    id="gpa"
+                                    name="gpa"
+                                    value={applicationData.gpa}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-                        <div>
-                            <label htmlFor="academic_level">Academic Level:</label>
-                            <select
-                                id="academic_level"
-                                name="academic_level"
-                                value={applicationData.academic_level}
-                                onChange={handleChange}
-                                required
-                            >
-                                <option value="GRAD">Graduate</option>
-                                <option value="UNDER">Undergraduate</option>
-                                <option value="HS">High School</option>
-                            </select>
-                        </div>
+                            <div>
+                                <label htmlFor="academic_level">Academic Level:</label>
+                                <select
+                                    id="academic_level"
+                                    name="academic_level"
+                                    value={applicationData.academic_level}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="GRAD">Graduate</option>
+                                    <option value="UNDER">Undergraduate</option>
+                                    <option value="HS">High School</option>
+                                </select>
+                            </div>
 
-                        <div>
-                            <label htmlFor="enrollment_status">Enrollment Status:</label>
-                            <select
-                                id="enrollment_status"
-                                name="enrollment_status"
-                                value={applicationData.enrollment_status}
-                                onChange={handleChange}
-                                required
-                            >
-                                <option value="FT">Full Time</option>
-                                <option value="PT">Part Time</option>
-                            </select>
-                        </div>
+                            <div>
+                                <label htmlFor="enrollment_status">Enrollment Status:</label>
+                                <select
+                                    id="enrollment_status"
+                                    name="enrollment_status"
+                                    value={applicationData.enrollment_status}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="FT">Full Time</option>
+                                    <option value="PT">Part Time</option>
+                                </select>
+                            </div>
 
-                        <div>
-                            <label htmlFor="department">Department:</label>
-                            <input
-                                type="text"
-                                id="department"
-                                name="department"
-                                value={applicationData.department}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div>
+                                <label htmlFor="department">Department:</label>
+                                <input
+                                    type="text"
+                                    id="department"
+                                    name="department"
+                                    value={applicationData.department}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-                        <div>
-                            <label htmlFor="SoP">Statement of Purpose (SoP):</label>
-                            <input
-                                type="file"
-                                id="SoP"
-                                name="SoP"
-                                onChange={handleFileChange}
-                                required
-                            />
-                        </div>
+                            <div>
+                                <label htmlFor="SoP">Statement of Purpose (SoP):</label>
+                                <input
+                                    type="file"
+                                    id="SoP"
+                                    name="SoP"
+                                    onChange={handleFileChange}
+                                    required
+                                />
+                            </div>
 
-                        <div>
-                            <button type="submit">Submit Application</button>
-                        </div>
-                    </form>
+                            <div>
+                                <button class="form-container-button" type="submit">Submit Application</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             ) : (
                 <p>Loading scholarship details...</p>
