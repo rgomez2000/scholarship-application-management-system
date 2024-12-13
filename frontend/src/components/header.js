@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { checkIsAdmin } from './services/api';
 import './header.css';
 import logo from './assets/logo.png';
 import Notifications from "./services/notifications";
@@ -7,7 +8,7 @@ import Notifications from "./services/notifications";
 
 const Header = () => {
     const navigate = useNavigate();
-    
+    const [isAdmin, setIsAdmin] = useState(false);
     // Check if the user is authenticated by looking for the token in localStorage
     const isAuthenticated = localStorage.getItem('token') !== null;
     
@@ -36,6 +37,19 @@ const Header = () => {
         navigate('/applications');
     };
 
+    const addApplicationsClick = () => {
+        navigate('/addScholarship');
+    };
+
+    useEffect(() => {
+        async function fetchIsAdmin() {
+            const isAdminFlag = await checkIsAdmin();
+            setIsAdmin(isAdminFlag);
+        }
+
+        fetchIsAdmin();
+    })
+
 
     return (
         <body class="header-body">
@@ -46,13 +60,14 @@ const Header = () => {
                 <span className="divider"></span>
                 <div class="header-section navigation">
                     <a href="" onClick={handleHomeClick} className="nav-link">Home</a>
-                    {isAuthenticated && <a href="" onClick={handleApplicationsClick} className="nav-link">Applications</a>}
+                    {isAuthenticated && isAdmin && <a href="" onClick={handleApplicationsClick} className="nav-link">Applications</a>}
+                    {isAuthenticated && isAdmin && <a href="" onClick={addApplicationsClick} className="nav-link">Add Scholarship</a>}
                 </div>
 
                 <div class="header-section auth-links">
                     {isAuthenticated ? (
                         <>
-                            <span class="greeting">Hi, {firstName}</span>
+                            
                             <span class="divider"></span>
                             <a href="/profile" class="auth-link" >Profile</a>
                             <span className="divider"></span>

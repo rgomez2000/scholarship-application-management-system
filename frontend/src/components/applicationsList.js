@@ -46,11 +46,13 @@ const ApplicationsList = () => {
                         {applications.map((application) => (
                             <li key={application.id}>
                                 <hr/>
-                                <Link to={`/applications/${application.id}`}>Go to application</Link>
                                 <p><strong>Scholarship Name:</strong> {application.scholarship.scholarship_name}</p>
                                 <p><strong>Amount:</strong> {application.scholarship.amount}</p>
                                 <p><strong>Status:</strong> {application.status}</p>
                                 <p><strong>Submitted On:</strong> {application.submitted_on}</p>
+                                <a href={`/applications/${application.id}`}>
+                                <button class="applications-list-button">Go to application</button>
+                                </a>
                             </li>
                         ))}
                     </ul>
